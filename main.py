@@ -5,22 +5,43 @@ import time
 from machine import Pin, I2C
 from umqtt.simple import MQTTClient
 import bme280
+import json
 
 # LED configuration
 led = Pin("LED", Pin.OUT)
 
+
+# Load configuration from file
+def load_config():
+    try:
+        with open("config.json", "r") as f:
+            config = json.load(f)
+            return config
+    except Exception as e:
+        print("Failed to load configuration:", e)
+        return None
+
+
+# Load configuration
+config = load_config()
+if not config:
+    print("Exiting due to configuration error.")
+    raise SystemExit
+
 # Wi-Fi configuration
-wifi_ssid = "<SSID>"
-wifi_password = "<PASSWD>"
+wifi_ssid = config["wifi"]["ssid"]
+wifi_password = config["wifi"]["password"]
 
 # MQTT broker configuration
-mqtt_broker = "<MQTT_BROKER_IP>"
-mqtt_port = 1883
-mqtt_username = "<MQTT_BROKER_USERNAME>"
-mqtt_password = "<MQTT_BROKER_PASSWD>"
-mqtt_temperature_topic = "<TOPIC_DIRECTORY>/temperature"
-mqtt_pressure_topic = "<TOPIC_DIRECTORY>/pressure"
-mqtt_humidity_topic = "<TOPIC_DIRECTORY>/humidity"
+mqtt_broker = config["mqtt"]["broker"]
+mqtt_port = config["mqtt"]["port"]
+mqtt_username = config["mqtt"]["username"]
+mqtt_password = config["mqtt"]["password"]
+mqtt_client_id = config["mqtt"]["client_id"]
+mqtt_temperature_topic = config["mqtt"]["topics"]["temperature"]
+mqtt_pressure_topic = config["mqtt"]["topics"]["pressure"]
+mqtt_humidity_topic = config["mqtt"]["topics"]["humidity"]
+
 
 # BME280 sensor configuration
 i2c = I2C(id=0, scl=Pin(1), sda=Pin(0), freq=100000)
