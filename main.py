@@ -11,6 +11,14 @@ import json
 led = Pin("LED", Pin.OUT)
 
 
+def blink_led(interval, count):
+    for _ in range(count):
+        led.on()
+        time.sleep(interval)
+        led.off()
+        time.sleep(interval)
+
+
 # Load configuration from file
 def load_config():
     try:
@@ -26,6 +34,9 @@ def load_config():
 config = load_config()
 if not config:
     print("Exiting due to configuration error.")
+    blink_led(0.1, 10)  # Rapid blinking to indicate config error
+    blink_led(1, 10)  # softly blinking to indicate config error
+    blink_led(0.1, 10)  # Rapid blinking to indicate config error
     raise SystemExit
 
 # Wi-Fi configuration
@@ -99,14 +110,6 @@ def read_sensor():
         print("Failed to read sensor data:", e)
         blink_led(0.2, 20)  # Fast blinking to indicate sensor error
         return None, None, None
-
-
-def blink_led(interval, count):
-    for _ in range(count):
-        led.on()
-        time.sleep(interval)
-        led.off()
-        time.sleep(interval)
 
 
 def main():
