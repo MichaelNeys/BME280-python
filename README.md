@@ -11,8 +11,8 @@ Temperature, humidity and pressure measurement using a Raspberry Pi Pico W with 
 
 ## Config
 ### WiFi
-- `SSID`: your WiFi network name
-- `PASSWD`: your WiFi network password
+- `SSID` - your WiFi network name
+- `PASSWD` - your WiFi network password
 
 ### MQTT
 - `MQTT_BROKER` - MQTT broker ip-address
