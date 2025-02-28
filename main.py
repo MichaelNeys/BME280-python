@@ -22,8 +22,8 @@ def blink_led(interval, count):
 # Load configuration from file
 def load_config():
     try:
-        with open("config.json", "r") as f:
-            config = json.load(f)
+        with open("config.json", "r") as file:
+            config = json.load(file)
             return config
     except Exception as e:
         print("Failed to load configuration:", e)
@@ -48,21 +48,27 @@ mqtt_broker = config["mqtt"]["broker"]
 mqtt_port = config["mqtt"]["port"]
 mqtt_username = config["mqtt"]["username"]
 mqtt_password = config["mqtt"]["password"]
-mqtt_client_id = config["mqtt"]["client_id"]
 mqtt_temperature_topic = config["mqtt"]["topics"]["temperature"]
 mqtt_pressure_topic = config["mqtt"]["topics"]["pressure"]
 mqtt_humidity_topic = config["mqtt"]["topics"]["humidity"]
 
+# update interval configuration
+update_interval = config["update_interval"]["time"] // 2
+
+# MQTT client configuration
+mqtt_client_id = config["mqtt"]["client_id"]
+client = MQTTClient(
+    mqtt_client_id,
+    mqtt_broker,
+    mqtt_port,
+    mqtt_username,
+    mqtt_password,
+    keepalive=(update_interval * 2 + 50),
+)
 
 # BME280 sensor configuration
 i2c = I2C(id=0, scl=Pin(1), sda=Pin(0), freq=100000)
 bme = bme280.BME280(i2c=i2c)
-
-# MQTT client configuration
-client_id = "<MQTT_CLIENT_ID>"
-client = MQTTClient(
-    client_id, mqtt_broker, mqtt_port, mqtt_username, mqtt_password, keepalive=650
-)
 
 
 def connect_wifi():
@@ -121,7 +127,7 @@ def main():
         publish_data(mqtt_temperature_topic, str(temperature))
         publish_data(mqtt_pressure_topic, str(pressure))
         publish_data(mqtt_humidity_topic, str(humidity))
-        for _ in range(300):  # 600 one-second intervals for sign of life
+        for _ in range(update_interval):
             led.on()
             time.sleep(1)
             led.off()
