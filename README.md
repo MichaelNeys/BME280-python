@@ -2,7 +2,7 @@
 Temperature, humidity and pressure measurement using a Raspberry Pi Pico W with I2C on the Bosch BME280 and sending its data to an MQTT server.
 
 ## Cabling
-![https://www.raspberrypi.com/documentation/microcontrollers/images/picow-pinout.svg]
+![Raspberry Pi Pico W pin configuration](https://www.raspberrypi.com/documentation/microcontrollers/images/picow-pinout.svg)
 - I2C0 SDA (pin 1) on `SDA`
 - I2C0 SCL (pin 2) on `SCL`
 - 3V3(OUT) (pin 36) on `VIN`
