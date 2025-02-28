@@ -1,0 +1,21 @@
+{
+    "wifi": {
+        "ssid": "<SSID>",
+        "password": "<PASSWD>"
+    },
+    "mqtt": {
+        "broker": "<MQTT_BROKER_IP>",
+        "port": 1883,
+        "username": "<MQTT_BROKER_USERNAME>",
+        "password": "<MQTT_BROKER_PASSWD>",
+        "client_id": "<MQTT_CLIENT_ID>",
+        "topics": {
+            "temperature": "<TOPIC_DIRECTORY>/temperature",
+            "pressure": "<TOPIC_DIRECTORY>/pressure",
+            "humidity": "<TOPIC_DIRECTORY>/humidity"
+        }
+    },
+    "update_interval": {
+        "time": 600
+    }
+}
