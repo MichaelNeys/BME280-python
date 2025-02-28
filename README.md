@@ -26,7 +26,7 @@ Temperature, humidity and pressure measurement using a Raspberry Pi Pico W with 
 - `time` - time in seconds between updates
 
 ## Flashing
-- copy both python files on the root folder of the Raspberry Pi Pico W
+- copy both python files to the root folder of the Raspberry Pi Pico W
 	- `main.py`
 	- `bme280.py`
 - copy `config.json` after filling in required information
