@@ -1,5 +1,5 @@
 # Bosch BME280 sensor
-Temperature, humidity and pressure measurement using a Raspberry Pi Pico W with I2C on the Bosch BME280 and sending its data to an MQTT server.
+Temperature, humidity and pressure measurement using Python on a Raspberry Pi Pico W with I2C on the Bosch BME280 and sending its data to an MQTT server.
 
 ## Cabling
 <img src="https://www.raspberrypi.com/documentation/microcontrollers/images/picow-pinout.svg" width="700">
