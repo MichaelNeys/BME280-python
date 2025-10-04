@@ -34,9 +34,9 @@ def load_config():
 config = load_config()
 if not config:
     print("Exiting due to configuration error.")
-    blink_led(0.1, 10)  # Rapid blinking to indicate config error
-    blink_led(1, 10)  # softly blinking to indicate config error
-    blink_led(0.1, 10)  # Rapid blinking to indicate config error
+    blink_led(0.1, 10)	# Rapid blinking to indicate config error
+    blink_led(1, 10)	# softly blinking to indicate config error
+    blink_led(0.1, 10)	# Rapid blinking to indicate config error
     raise SystemExit
 
 # Wi-Fi configuration
@@ -78,11 +78,11 @@ def connect_wifi():
         try:
             print("Connecting to Wi-Fi...")
             wlan.connect(wifi_ssid, wifi_password)
-            time.sleep(10)  # Wait for 10 seconds before checking connection status
+            time.sleep(4)  # Wait for 4 seconds before checking connection status
         except Exception as e:
             print("Wi-Fi connection failed:", e)
             blink_led(0.1, 10)  # Rapid blinking to indicate Wi-Fi error
-            time.sleep(30)  # Wait for 30 seconds before retrying
+            time.sleep(10)  # Wait for 10 seconds before retrying
     print("Connected to Wi-Fi:", wlan.ifconfig())
 
 
